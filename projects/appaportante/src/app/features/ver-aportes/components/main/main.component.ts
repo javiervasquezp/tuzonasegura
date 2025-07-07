@@ -22,7 +22,8 @@ export class MainComponent implements OnInit {
   urlReporte: string = "";
   constructor(private spinnerService: NgxSpinnerService,
               private verAportesService: VerAportesService,
-              private userService: UserService
+              private userService: UserService,
+              private modalService: BsModalService
               ) { }
 
   ngOnInit(): void {

@@ -5,7 +5,6 @@ import { CentroAtencionVirtualRoutingModule } from './centro-atencion-virtual-ro
 import { CentroAtencionVirtualComponent } from './centro-atencion-virtual.component';
 import { MainComponent } from './components/main/main.component';
 import { SharedModule } from '../../shared/shared.module';
-import { ModalModule } from 'ngx-bootstrap/modal';
 
 @NgModule({
   declarations: [
@@ -15,8 +14,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
   imports: [
     CommonModule,
     CentroAtencionVirtualRoutingModule,
-    SharedModule.forRoot(),
-    
+    SharedModule.forRoot()
   ]
 })
 export class CentroAtencionVirtualModule { }
