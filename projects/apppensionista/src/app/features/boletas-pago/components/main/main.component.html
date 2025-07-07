@@ -1,0 +1,145 @@
+<div class="main__right">
+    <h2 ><img loading="lazy" src="~/../assets/images/icon-doc.svg" alt="icon doc" > Ver mis constancias de pago</h2>
+    <app-alerta *ngIf="warning.length > 0" [msg]="warning"></app-alerta>
+    <div *ngIf="warning.length == 0" class="detail">
+        <app-usuario [mostrarImprimir]="true" (printHandler)="onClickPrint()" ></app-usuario>
+        <div class="detail__page">
+            <app-fechas></app-fechas>
+            <h3>Detalle de pago por régimen</h3>
+            <ul style="list-style-position: outside;">
+                <li style="line-height: 1.5; color: var(--black-color); font-weight: normal;">Si perteneces al Régimen 19990, ten en cuenta que el pago de pensiones <span class="text-yellow"><b>se efectúa por mes adelantado</b></span>, en aplicación del artículo 66° de su reglamento modificado por el Decreto Supremo N° 10-76-TR.</li>
+                <li style="line-height: 1.5; color: var(--black-color); font-weight: normal;">Si perteneces al Régimen 18846, también el pago de pensiones <span class="text-yellow"><b>se efectúa por mes adelantado</b></span>, por ampliación del reglamento.</li>            
+            </ul>
+            <div class="form-row no-gutters">
+                <!--<div class="col-lg-2 col-md-2">
+                    <span>Régimen</span>
+                </div>-->
+                <div class="col-lg-4 col-md-4 form__right">
+                    <select class="form-control rounded-pill"  (change)='onChangeListarRegimen()' [(ngModel)]="idRegimen"   >
+                        <ng-container *ngFor="let item of DetalleRegimenes">  
+                            <option  *ngIf="item.Regimen =='20530'" [value]="item.Regimen">Otro régimen administrado por la ONP</option>
+                            <option  *ngIf="item.Regimen !='20530'" [value]="item.Regimen">Régimen {{item.Regimen}}</option>
+                        </ng-container>
+                        
+                    </select>
+                </div>
+                
+                
+            </div>
+           <!-- 
+            <div class="detail__regimen">
+                <span><b>D.L. 19990</b></span>
+                <span><b>Cuenta:</b> C379384</span>
+                <span><b>Prestación:</b> Jubilación</span>
+            </div>-->
+            <div class="detail__regimen" style="margin-top:1px;grid-template-columns: none;"  > <!--  [ngStyle]="{'display':DetalleRegimenes.length > 2 ? 'grid' : '' }"   -->
+                <ng-container *ngFor="let item of DetalleRegimenesFilter">  
+                    <span *ngIf="item.Regimen =='20530'" >Otro régimen administrado por la ONP</span>
+                    <span *ngIf="item.Regimen !='20530'" ><b>Régimen</b> {{item.Regimen}}</span>                  
+                    <ng-container *ngFor="let item2 of item.DetalleRegimenCuentas">  
+                        <span><b>Cuenta:</b> {{item2.Cuenta}}</span>
+                        <span><b>Prestación:</b> {{item2.Prestacion}}</span>
+                    </ng-container>                   
+                </ng-container>
+            </div>
+           
+
+            <div class="table__regimen d-movil">
+               
+                <ng-container *ngFor="let item of ListaBoletasPagos">
+                    <ng-container *ngFor="let item2 of item">
+
+                        <div class="detail__row" style="grid-template-columns:none;">
+                            <table class="table">
+                                <tr>
+                                    <td class="title-column">Entidad</td>
+                                    <td class="table__items_td">{{item2.desEntRepago}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="title-column">Mes - Año</td>
+                                    <td class="table__items_td">{{item2.desEmision}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="title-column">Monto bruto</td>
+                                    <td class="table__items_td">{{item2.simbMoneda}} {{item2.montoPagoBruto}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="title-column">Monto neto</td>
+                                    <td class="table__items_td">{{item2.simbMoneda}} {{item2.montoPagoNeto}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="title-column">Estado de pago</td>
+                                    <td class="table__items_td" *ngIf="item2.inConsPago=='1'">{{item2.estPago}}</td>
+                                    <td class="table__items_td" *ngIf="item2.inConsPago!='1'">EMITIDO</td>
+                                </tr>
+                                <tr>
+                                    <td class="title-column">Detalle de pago</td>
+                                    <td class="table__items_td" *ngIf="item2.inConsPago=='1'" >
+                                        <a style="cursor: pointer;" class="bton bton-second" (click)="onClickdescargaPDF(item2);">Descargar</a></td>
+                                    <td class="table__items_td" *ngIf="item2.inConsPago!='1'">{{item2.fechaReintegro}}</td>
+                                </tr>
+                            </table>
+                            
+                             
+                        </div>
+
+                   <!--     <div class="detail__row">
+                            <div class="table__header">
+                                <li class="table__min-height">Entidad</li> 
+                                <li>Mes - Año</li>
+                                <li>Monto bruto</li>
+                                <li>Monto neto</li>
+                                <li>Estado de pago</li>
+                                <li>Detalle de pago</li>
+                            </div>
+                            <div class="table__items" >
+                                <li class="table__min-height">{{item2.desEntRepago}}</li> 
+                                <li>{{item2.desEmision}}</li>
+                                <li>{{item2.simbMoneda}} {{item2.montoPagoBruto}}</li>
+                                <li>{{item2.simbMoneda}} {{item2.montoPagoNeto}}</li>
+                                <li *ngIf="item2.inConsPago=='1'">{{item2.estPago}}</li>
+                                <li *ngIf="item2.inConsPago=='1'" >
+                                    <span>
+                                        <a style="cursor: pointer;" class="bton bton-second" (click)="onClickdescargaPDF(item2)">Descargar</a>
+                                    </span>
+                                    </li>
+                                <li *ngIf="item2.inConsPago!='1'">EMITIDO</li>
+                                <li *ngIf="item2.inConsPago!='1'">{{item2.fechaReintegro}}</li>
+                                                              
+                            </div>
+                        </div>-->
+
+                    </ng-container>
+                </ng-container>
+                
+            </div>
+
+            <div class="table__desktop d-desktop" >
+                <ng-container *ngFor="let item of ListaBoletasPagos">                    
+                    <div class="table__desktop--header">
+                        <span>Entidad</span>
+                        <span>Mes - Año</span>
+                        <span>Monto bruto</span>
+                        <span>Monto neto</span>
+                        <span>Estado de pago</span>
+                        <span>Detalle del pago</span>
+                    </div>
+                    <ng-container *ngFor="let item2 of item">
+                        <div class="table__desktop--item">
+                            <span>{{item2.desEntRepago}}</span>
+                            <span>{{item2.desEmision}}</span>
+                            <span>{{item2.simbMoneda}} {{item2.montoPagoBruto}}</span>
+                            <span>{{item2.simbMoneda}} {{item2.montoPagoNeto}}</span>
+                            <span *ngIf="item2.inConsPago=='1'">{{item2.estPago}}</span>
+                            <span *ngIf="item2.inConsPago=='1'" ><img style="cursor:pointer;" (click)="onClickdescargaPDF(item2);" loading="lazy" src="~/../assets/images/icon-download.svg" alt="download"></span>
+                            <span *ngIf="item2.inConsPago!='1'">EMITIDO</span>
+                            <span *ngIf="item2.inConsPago!='1'">{{item2.fechaReintegro}}</span>
+                        </div>
+                    </ng-container>
+
+                </ng-container>
+                             
+            </div>
+        </div>
+    </div>
+</div>

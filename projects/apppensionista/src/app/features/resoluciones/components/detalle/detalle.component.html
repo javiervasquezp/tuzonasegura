@@ -1,0 +1,75 @@
+<div class="main__right">
+    <h2 ><img loading="lazy" src="~/../assets/images/icon-doc.svg" alt="icon doc" > Mis resoluciones</h2>
+    <app-alerta *ngIf="warning.length > 0" [msg]="warning"></app-alerta>
+    <div *ngIf="warning.length == 0" class="detail">
+        <app-usuario [mostrarImprimir]="true"  (printHandler)="onClickPrint()"  ></app-usuario>
+        <div class="detail__page">
+            <app-fechas [isVisibleFechaActual]="false"></app-fechas>
+            <!--<div class="date__publish">
+                <p>Fecha de consulta: 23/03/2021</p>
+                <p></p>
+            </div>-->
+            <h3>Documentación del trámite</h3>
+
+            <b>Régimen {{cabecera.DecretoLey}}</b>
+            <p>Expediente: {{cabecera.Expediente}}</p>
+
+            <div class="table__desktop d-desktop">
+                <div class="table__desktop--header">
+                    <span>Tipo de documento</span>
+                    <span>Número</span>
+                    <span>Fecha</span>
+                    <span>Descripción</span>
+                    <span>Resultado</span>
+                    <span>Leer</span>
+                </div>
+                <ng-container *ngFor="let item of Detalle">
+                    <div class="table__desktop--item">
+                        <span>{{item.TipoDocumento}}</span>
+                        <span>{{item.NumeroDocumento}}</span>
+                        <span>{{item.FechaCreacionNSP}}</span>
+                        <span>{{item.DescripcionDocumento}}</span>
+                        <span>{{item.ResultadoDocumento}}</span>
+                        <span><img (click)="onClickDescargarPDF(item.IdDetalle);" style="cursor: pointer;" loading="lazy" src="~/../assets/images/icon-download.svg" alt="download"></span>
+                    </div>
+                </ng-container>
+              
+            </div>
+            
+            <div class="table__regimen d-movil">
+                <ng-container *ngFor="let item of Detalle">
+                    <div class="detail__row">
+                        <div class="table__header">
+                            <li>Tipo de documento</li>
+                            <li>Número</li>
+                            <li>Fecha</li>
+                            <li>Descripción</li>
+                            <li>Resultado</li>
+                            <li>Leer</li>
+                        </div>
+                        <div class="table__items">
+                            <li>{{item.TipoDocumento}}</li>
+                            <li>{{item.NumeroDocumento}}</li>
+                            <li>{{item.FechaCreacionNSP}}</li>
+                            <li>{{item.DescripcionDocumento}}</li>
+                            <li>{{item.ResultadoDocumento}}</li>
+                            <li  >
+                                <a style="cursor: pointer;" class="bton bton-second" (click)="onClickDescargarPDF(item.IdDetalle)">Descargar</a>
+                                </li>
+                        </div>
+                    </div>
+                </ng-container>
+                
+            </div>
+
+           
+            <br>
+            <b>Nota</b>
+            <br>
+            <p>Es posible que todas tus resoluciones no se encuentren disponibles por este medio. Ten en cuenta que encontrarás solo aquellas resoluciones que han sido digitalizadas hasta el momento.</p>
+            <br>
+            <p>Si tienes alguna consulta sobre tus documentos, contáctanos a través de ONP Te escucha (01) 634 2222, 
+                opción 3.</p>
+        </div>
+    </div>
+</div>

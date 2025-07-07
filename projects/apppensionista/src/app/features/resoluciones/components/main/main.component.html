@@ -1,0 +1,50 @@
+<div class="main__right">
+    <h2 ><img loading="lazy" src="~/../assets/images/icon-resoluciones.svg" alt="icon doc" > Mis resoluciones</h2>
+    <app-alerta *ngIf="warning.length > 0" [msg]="warning"></app-alerta>
+    <div *ngIf="warning.length == 0" class="detail">
+        <app-usuario></app-usuario>
+        <br>
+        <div class="detail__page">
+            <p>Selecciona el documento que deseas consultar de acuerdo al régimen en que te encuentras.</p>
+            <div class="table__regimen d-movil">
+                <ng-container *ngFor="let document of ListaDatosExpediente">
+                    <div class="detail__row" style="grid-template-columns: repeat(1,99%);">
+                        <div class="table__header" style="display: contents;">
+                            <li *ngIf="document.Ley !='20530'">Régimen {{document.Ley}}</li>
+                            <li *ngIf="document.Ley =='20530'">Otro régimen administrado por la ONP</li>
+                            
+                        </div>
+                        <ng-container *ngFor="let document2 of document.Data">
+                            <div class="table__items">
+                                <li style="text-align:center;">Expediente: {{document2.NumeroExpediente}}
+                                    <a style="cursor: pointer;margin-top: 5px;display: inline-block;" class="bton bton-second" (click)="verDetalle(document2)">Documentos</a>
+                                </li>
+                                 
+                            </div>
+                        </ng-container>                        
+                    </div>                    
+                </ng-container>
+               
+            </div>
+
+            <div class="table__desktop d-desktop">
+                <ng-container *ngFor="let document of ListaDatosExpediente">
+                    <div class="table__desktop--header" style="grid-template-columns: repeat(1,1fr);text-align: left;">
+                        <span *ngIf="document.Ley !='20530'">Régimen {{document.Ley}}</span>
+                        <span *ngIf="document.Ley =='20530'">Otro régimen administrado por la ONP</span>
+                    </div>
+                    <ng-container *ngFor="let document2 of document.Data">
+                        <div class="table__desktop--item-2column" style="margin-bottom: .2rem;">
+                            <span>Expediente: {{document2.NumeroExpediente}}</span>
+                            <span>
+                                <a style="cursor: pointer;" class="bton bton-second" (click)="verDetalle(document2)">Documentos</a>
+                            </span>
+                        </div>
+                    </ng-container>
+                </ng-container>
+               
+               
+            </div>
+        </div>
+    </div>
+</div>

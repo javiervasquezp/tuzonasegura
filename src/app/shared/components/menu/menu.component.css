@@ -1,0 +1,23 @@
+.hidden{
+    display: none;
+}
+.displays{
+    display: block !important;
+}
+.side__item__resum {
+    border-bottom: 1px solid #999;margin-bottom: 1.5rem;
+}
+.side__item__resum .title_item {
+    cursor:pointer; 
+    color: #141B4D;
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.2rem;
+}
+.side__item__resum .title_item img {
+    width: 18px;
+    margin-right: .8rem;
+}

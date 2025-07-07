@@ -1,0 +1,157 @@
+<div class="main__right">
+    <h2 ><img loading="lazy" src="~/../assets/images/icon-doc.svg" alt="icon doc" >Ver mis datos de pensionista</h2>
+    <app-alerta *ngIf="warning.length > 0" [msg]="warning"></app-alerta>
+    <div *ngIf="warning.length == 0" class="detail">
+        <app-usuario [mostrarImprimir]="true" (printHandler)="onClickPrint()"></app-usuario>
+        <div class="detail__page">
+            <app-fechas></app-fechas>
+            <h3>Mis datos</h3>
+            <div class="row">
+                <div class="col-lg-4 col-md-4">
+                    <b>Fecha de nacimiento</b>
+                    <p>{{datosCabecera!.FechaNacimiento}}</p>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <b>Sexo</b>
+                    <p>{{datosCabecera!.Sexo!}}</p>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <b>Teléfono</b>
+                    <p>{{datosCabecera!.Telefono}}</p>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-12">
+                    <b>Dirección</b>
+                    <p>{{datosCabecera!.Direccion}}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-4">
+                    <b>Distrito</b>
+                    <p>{{datosCabecera!.Distrito}}</p>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <b>Provincia</b>
+                    <p>{{datosCabecera!.Provincia}}</p>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <b>Departamento</b>
+                    <p>{{datosCabecera!.Departamento}}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <b>Referencia</b>
+                    <p>{{datosCabecera!.Referencia}}</p>
+                </div>
+            </div>
+            <hr>
+            <h3>Datos de mi pensión</h3>
+            <ng-container *ngFor="let item of datosDetalleHead" >
+                <b *ngIf="item.DescripcionRegimen =='20530'">Otro régimen administrado por la ONP</b>
+                <b *ngIf="item.DescripcionRegimen !='20530'">Régimen {{item.DescripcionRegimen}}</b><br><br>
+                <ng-container *ngFor="let item2 of item.Data" >
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4">
+                            <b>Cuenta</b>
+                            <p>{{item2.DescripcionCuenta}}</p>
+                        </div>
+                        <div class="col-lg-4 col-md-4">
+                            <b>Prestación</b>
+                            <p>{{item2.Prestacion}}</p>
+                        </div>
+                        <div class="col-lg-4 col-md-4">
+                            <b>Monto de pensión</b>
+                            <p>{{item2.SimboloMoneda}} {{item2.MontoPension}}</p>
+                        </div>
+                    </div>
+                   
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4">
+                            <b>Tipo de pago</b>
+                            <p>{{item2.TipoPago}}</p>
+                        </div>
+                        <div class="col-lg-4 col-md-4">
+                            <b>Entidad</b>
+                            <p>{{item2.DescripcionEntidad}}</p>
+                        </div>
+                        <div class="col-lg-4 col-md-4">
+                            <b>Cuenta de ahorro</b>
+                            <p>{{item2.CuentaBancaria}}</p>
+                        </div>
+                        <div *ngIf="item2.DescripcionAgencia" class="col-lg-4 col-md-4">
+                            <b>Agencia</b>
+                            <p>{{item2.DescripcionAgencia}}</p>
+                        </div>
+                    </div>                    
+                    <div class="row">
+                        <div *ngIf="item2.DescripcionEntidadRepago" class="col-lg-4 col-md-4">
+                            <b>Entidad Repago</b>
+                            <p>{{item2.DescripcionEntidadRepago}}</p>
+                        </div>
+                        <div *ngIf="item2.DescripcionLugarRepago" class="col-lg-4 col-md-4">
+                            <b>Lugar de Repago</b>
+                            <p>{{item2.DescripcionLugarRepago}}</p>
+                        </div>
+                        <div *ngIf="item2.DescripcionZonal" class="col-lg-4 col-md-4">
+                            <b>Zonal</b>
+                            <p>{{item2.DescripcionZonal}}</p>
+                        </div>
+                    </div>
+                    <ng-container *ngIf="item2.TipoRepresentante">
+                        <h3>Datos del representante:</h3>
+                        <div  class="row">
+                            <div class="col-lg-4 col-md-4">
+                                <b>Tipo </b>
+                                <p>{{item2.TipoRepresentante}}</p>
+                            </div>
+                            <div class="col-lg-4 col-md-4">
+                                <b>Apellido paterno </b>
+                                <p>{{item2.ApellidoPaternoRepresentante}}</p>
+                            </div>
+                            <div class="col-lg-4 col-md-4">
+                                <b>Apellido materno </b>
+                                <p>{{item2.ApellidoMaternoRepresentante}}</p>
+                            </div>
+                        </div>
+                        <div  class="row">
+                            
+                            <div class="col-lg-4 col-md-4">
+                                <b>Nombres </b>
+                                <p>{{item2.TipoRepresentante}}</p>
+                            </div>
+                            <div class="col-lg-4 col-md-4">
+                                <b>Código </b>
+                                <p>{{item2.CodigoRepresentante}}</p>
+                            </div>
+                            <div class="col-lg-4 col-md-4">
+                                 
+                                <p>Vigencia: del {{item2.FechaVigenciaInicio}} al {{item2.FechaVigenciaFin}}</p>
+                            </div>
+                        </div>
+                    </ng-container>
+                   
+                </ng-container>
+                
+            </ng-container>
+           
+            <hr>
+            <b>Leyenda</b><br><br> 
+            <ng-container *ngIf="GlosaDetalle.length > 0"> 
+                <b class="mt-2">Entidad</b>
+                <p *ngFor="let item of GlosaDetalle">{{item}}</p>
+            </ng-container>
+            <app-leyenda-documento></app-leyenda-documento>
+            <b class="mt-2">Monto de pensión</b>
+            <p>Equivale al monto habitual extraído del último pago que no incluye conceptos no 
+                pensionables tales como bonificaciones, reintegros, retenciones ni descuentos.</p>
+             
+            <div class="date__publish-footer">
+                <p >La información proporcionada es solo para fines de consulta, carece de valor legal</p>
+            </div>
+            
+        </div>
+    </div>
+</div>

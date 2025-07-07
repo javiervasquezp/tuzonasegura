@@ -1,0 +1,132 @@
+<div class="main__right">
+    <h2 ><img loading="lazy" src="~/../assets/images/icon-interes-legal.svg" alt="icon doc" > Mis intereses legales cobrados</h2>
+    <app-alerta *ngIf="warning.length > 0" [msg]="warning"></app-alerta>
+    <div *ngIf="warning.length == 0" class="detail">
+        <app-usuario></app-usuario>
+        <div class="detail__page">            
+            <app-fechas [fechaActual]="fechaultimaActualizacion"></app-fechas>
+            <ng-container *ngFor="let item of ListaInteresesLegales" >
+                <h3>Datos de mi cuenta</h3>
+                <b>Régimen 19990</b>
+                <br><br>
+                <div class="row">
+                    <div class="col-4">
+                        <b>Cuenta</b>
+                        <p>{{item.Cuenta}}</p>
+                    </div>
+                    <div class="col-4">
+                        <b>Prestación</b>
+                        <p>{{item.Prestacion}}</p>
+                    </div>
+                    <div class="col-4">
+                        <b>Modalidad de pago</b>
+                        <p>{{item.ModalidadPago}}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm">
+                        <b>Fecha de pago</b>
+                        <p>{{item.FechaPago}}</p>
+                    </div>
+                </div>
+                <hr>
+                <h3>Detalle de consulta</h3>
+                <b>Intereses</b>
+                <div class="row">
+                    <div class="col-sm">
+                        <p>Periodo desde el {{item.FechaInicioPeriodoInteres}} al {{item.FechaFinPeriodoInteres}}</p>
+                    </div>
+                    <!--<div class="col-sm">
+                        <p></p>
+                    </div>  -->                 
+                </div>
+                <div class="row" *ngIf="item.MontoCantidadDevengado != 0">
+                    <div class="col-sm">
+                        <p>Canc. total dev. desde el {{item.FechaInicioCantidadDevengado}} al {{item.FechaFinCantidadDevengado}}</p>
+                    </div>
+                                     
+                </div>
+                <div class="row">
+                    <div class="col-8">
+                        <p>Subtotal</p>
+                    </div>
+                    <div class="col-4  ">
+                        <p class="text__right">S/ {{item.SubtotalIntereses}}</p>
+                    </div>
+                </div>
+                <div class="row" *ngIf="item.MontoDescuentoInteresesPagado != 0">
+                    <div class="col-8">
+                        <p>Dscto. intereses pagados</p>
+                    </div>
+                    <div class="col-4  ">
+                        <p class="text__right">S/ {{item.MontoDescuentoInteresesPagado}}</p>
+                    </div>
+                </div>
+                <div class="row" *ngIf="item.MontoDescuentoInteresPagadoPorTransaccion != 0">
+                    <div class="col-8">
+                        <p>Dscto. intereses pagados por transacciones de devengados (Ley N° 28266)</p>
+                    </div>
+                    <div class="col-4  ">
+                        <p class="text__right">S/ {{item.MontoDescuentoInteresPagadoPorTransaccion}}</p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-8">
+                        <p>Monto a pagar por interés</p>
+                    </div>
+                    <div class="col-4  ">
+                        <p class="text__right">S/ {{item.MontoPagarPorInteres}}</p>
+                    </div>
+                </div>
+                <hr>
+                <h3>Cuadro de devengados pagados</h3>
+                <div class="row">
+                    <div class="col-12">
+                        <b>Devengados</b>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-8">
+                        <p>Periodo desde el {{item.FechaInicioPeriodoDevengado}} al {{item.FechaFinPeriodoDevengado}}</p>
+                    </div>
+                    
+                    <div class="col-4  ">
+                        <p class="text__right">S/ {{item.MontoPeriodoDevengado}}</p>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-8">
+                        <b>Devengado bruto</b>
+                    </div>
+                    <div class="col-4  ">
+                        <p class="text__right">S/ {{item.MontoDevengadoBruto}}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-8">
+                        <p>Descuento seguro social</p>
+                    </div>
+                    <div class="col-4  ">
+                        <p class="text__right">S/ {{item.MontoDescuentoSeguroSocial}}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-8">
+                        <p>Monto neto de devengados</p>
+                    </div>
+                    <div class="col-4 ">
+                        <p class="text__right">S/ {{item.MontoNetoDevengado}}</p>
+                    </div>
+                </div>
+    
+            </ng-container>
+            
+            <div class="date__publish-footer">
+                <p >La información proporcionada es solo para fines de consulta, carece de valor legal</p>
+            </div>
+            
+        </div>
+    </div>
+</div>

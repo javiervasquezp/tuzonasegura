@@ -1,0 +1,110 @@
+<header class="header">
+    <div class="header__content">
+        <div class="header__left">
+            <img class="btn-menu" loading="lazy" src="~/../assets/images/icon-menu-movil.svg" alt="menu">
+            <img class="logo" loading="lazy" src="~/../assets/images/logo-onp-virtual.svg" alt="logo onp">
+        </div>
+        <div class="header__right">
+            <div class="menu__desktop">
+                <ul><!--(clic000k)="LogOut()"-->
+                    <li *ngIf="!soloVerCasilla" > 
+                        <a style="cursor: pointer;"  (click)="mostrarFichaAsegurado()" class="item-login" id="itemFichaAsegurado">
+                            <img class="icon-menu" style="width: 25px;" loading="lazy" src="~/../assets/images/header/ONP_icono_ficha_apgado.png"> Ficha del asegurado
+                        </a> 
+                    </li>
+                    <li *ngIf="!soloVerCasilla" class="border-li-left"> 
+                        <a style="cursor: pointer;"  (click)="mostrarOperaciones()"  target="_self"  class="item-login header-activa" id="itemOperaciones">
+                            <img class="icon-menu" loading="lazy" src="~/../assets/images/header/ONP_Icono__mis_operaciones_encendido.png">  
+                        Mis Operaciones
+                        </a> 
+                    </li>
+                    <li class="header--desktop" class="border-li-left border-li-right header--desktop"> 
+                        <a style="cursor: pointer;"  (click)="mostrarBandeja()" id="idbuzon"  class="item-login" id="itemCasilla"> 
+                            <img class="icon-menu" loading="lazy" src="~/../assets/images/header/ONP_Icono_casilla_electronica_apagado.png">
+                            <b>Casilla electrónica</b>
+                        </a>
+                    </li>
+                    <!-- <li><a href="https://onpvirtual.pe/#/te-asesoramos" target="_blank" class="item-login">Te asesoramos</a></li> -->
+                    <li>
+                        <a style="cursor: pointer; " id="btnLogin" (click)="addModalProcessClick();" class="item-login">
+                            Cerrar sesión
+                            <!-- <img class="ml-2" loading="lazy" src="~/../assets/images/btn-user-login.svg" alt="user login"> -->
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="header--movil">
+                <img class="mr-3" loading="lazy" src="/../assets/images/header/ONP_icono_sobre_blanco.png" (click)="mostarBandejaMovil()" alt="casilla" id="itemCasillaMovil">
+                <a id="aFichaAseguradoMovil"><img class="mr-3" loading="lazy" src="/../assets/images/header/ONP_icono_ficha_apgado.png" (click)="mostrarFichaAseguradoMovil()" alt="Ficha del asegurado" id="itemFichaAseguradoMovil"></a>
+                <img class="btn-user" loading="lazy" src="~/../assets/images/btn-user-login.svg" alt="user login">
+            </div>
+        </div>
+        <p *ngIf="user.TypeUser != sharedConstants.Perfiles.Representante"><span class="text-xl">Hola, <b>{{NombreUsuario}}.</b></span> <span class="text-light">Te damos la bienvenida a la ONP.</span></p>
+    </div>
+    <fieldset *ngIf="user.TypeUser == sharedConstants.Perfiles.Representante" class="header-datos-rep header--desktop">
+        <div class="row">
+            <div class="col-lg-6"><b>Representante: </b> {{user.FullNameApoderado}}</div>
+            <div class="col-lg-6 right-side"><b>Vigencia del plazo: </b></div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6"><b>Representado: </b> {{user.FullName}}</div>
+            <div class="col-lg-6 right-side">hasta el {{user.EffectiveDate}}</div>
+        </div>
+    </fieldset>
+    <fieldset *ngIf="user.TypeUser == sharedConstants.Perfiles.Representante" class="header-datos-rep header--movil">
+        <div class="row">
+            <div class="col-sm-12"><b>Representante: </b> {{user.FullNameApoderado}}</div>
+            <div class="col-sm-12"><b>Representado: </b> {{user.FullName}}</div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12"><b>Vigencia del plazo: </b></div>
+            <div class="col-sm-12">hasta el {{user.EffectiveDate}}</div>
+        </div>
+    </fieldset>
+</header>
+
+
+
+<!-- Menú movil -->
+<div class="menu__movil">
+    <h2>TUS OPERACIONES</h2>
+    <div class="menu__side" id="menu-movil">
+
+        <!--
+        <div class="side__item" *ngFor="let item of ListaMenu">           
+            <h3><img loading="lazy" [attr.src]="item.Icono" alt="icon doc"> {{item.NombreServicio}}</h3>
+            <ul>
+                <li *ngFor="let subitem of item.Detalle">
+                  <a [id]="'divmovil'+subitem.IdServicio" [name]="'divmovil'+subitem.IdServicio" 
+                  *ngIf="subitem.IsExterno != 'SI'" 
+                  style="cursor: pointer;" 
+                  (click)="navigate(subitem.Url!,subitem.IdServicio+'')">{{subitem.NombreServicio}}</a>
+                  <a *ngIf="subitem.IsExterno == 'SI'" style="cursor: pointer;" [attr.href]="subitem.Url" target="_black" >{{subitem.NombreServicio}}</a>
+                </li>
+                
+            </ul>
+          </div>-->
+          <div  class="side__item__resum" *ngFor="let itemPrinc of ListaMenuPrincipal; let indx = index" >
+            <h3 class="title_item" *ngIf="itemPrinc.NombrePerfil" (click)="MostrarOpciones('divMov'+indx)" ><img   loading="lazy" src="~/../assets/images/icon-menu.svg" alt="icon doc">
+                {{itemPrinc.NombrePerfil}} </h3>
+            <div [id]="'divMov'+indx" [className]="indx == 0 ? 'grup-menu hidden displays' : 'grup-menu hidden'" >
+                <div class="side__item" *ngFor="let item of itemPrinc.ListaMenu">           
+                    <h3><img loading="lazy" [attr.src]="item.Icono" alt="icon doc"> {{item.NombreServicio}}</h3>
+                    <ul>
+                        <li *ngFor="let subitem of item.Detalle">
+                          <a [id]="'divmovil'+subitem.IdServicio" [name]="'divmovil'+subitem.IdServicio" 
+                          *ngIf="subitem.IsExterno != 'SI'" 
+                          style="cursor: pointer;" 
+                          (click)="navigate(subitem.Url!,subitem.IdServicio+'')">{{subitem.NombreServicio}}</a>
+                          <a *ngIf="subitem.IsExterno == 'SI'" style="cursor: pointer;" [attr.href]="subitem.Url" target="_black" >{{subitem.NombreServicio}}</a>
+                        </li>                        
+                    </ul>
+                  </div>         
+            </div>
+        
+        </div>
+
+         
+         
+    </div>
+</div>

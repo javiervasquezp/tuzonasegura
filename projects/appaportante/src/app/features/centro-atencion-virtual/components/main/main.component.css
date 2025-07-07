@@ -1,0 +1,500 @@
+.main__right h2 {
+    padding: 0 3.2rem 0.5rem !important;
+}
+
+.my__layout {
+    width: 100%;
+    height: 100%;
+    display: block;
+    color: var(--second-color);
+}
+
+.my__header {
+    width: 100%; 
+    display: flex; 
+    flex-direction: row; 
+    justify-content: space-between;
+}
+
+.my__header__movil {
+    width: 100%; 
+    display: none; 
+    flex-direction: column; 
+}
+
+.my__header .my__title {
+    width: 40%;
+}
+
+.my__header__movil .my__title_movil  {
+    width: 100%; 
+}
+
+.my__header__movil .my__links__movil {
+    width: 100%; 
+    display: flex; 
+    flex-direction: row; 
+    justify-content: space-around;
+}
+
+.my__header .my__title img {
+    width: 40px;
+    height: auto;
+}
+
+.my__header__movil .my__title_movil img {
+    width: 40px;
+    height: auto;
+}
+
+.my__header .my__title__button__box {
+    display: flex; 
+    flex-direction: row; 
+    justify-content: space-around; 
+    width: 40%; 
+}
+
+.my__header .my__title__button__box img {
+    width: 30px; 
+    height: auto; 
+    margin-right: 0px;
+}
+
+.my__header .my__title__button__box a {
+    font-size: 12px;
+}
+
+.my_card {
+    width: 90%;
+    height: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.my__card__img {
+    width: 100%;
+    height: auto;
+}
+
+.my_card_movil {
+    display: none;
+    width: 100%;
+}
+
+.my_card_movil_body {
+    width: 90%;
+}
+
+.my_card_movil_header {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.my_card_movil_header img {
+    width: 50px;
+    height: auto;
+}
+
+.my_card_movil_instrucciones p {
+    font-size: 15px;
+}
+
+.my_card_movil_header h3 {
+    font-size: 20px;
+    margin-left: 10px;
+    margin-top: 20px;
+    font-weight: 600;
+}
+
+.re-body-movil {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.re-body-movil-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    height: 75px;
+    align-items: center;
+}
+
+.re-body-movil-item-image {
+    width: 30%;
+    height: 100%;
+    text-align: center;
+}
+
+.re-body-movil-item-image img {
+    height: 40px;
+    width: auto;
+}
+
+.re-body-movil-item-pa {
+    width: 65%;
+}
+
+.re-body-movil-item-pa p {
+    font-size: 15px;
+    text-align: justify;
+    line-height: normal;
+}
+
+.my__layout .my_card .my__card__img img {
+    width: 95%;
+    height: auto;
+}
+
+.body__contenedor__headder {
+    height: 215px;
+}
+
+.body__contenedor__headder h3 {
+    font-weight: 700;
+}
+
+.body__contenedor__headder p {
+    margin-top: -5px;
+    margin-bottom: 1rem;
+}
+
+.div-img {
+    height: 5rem;
+}
+
+.div-img img {
+    width: auto;
+    height: 80%;
+}
+
+.item-text p {
+    line-height: 1.3;
+    font-size: 14px;
+}
+
+.body__contenedor__consentimiento {
+    height: 50px;
+}
+
+.body__contenedor__consentimiento label {
+    font-size: 14px;
+}
+
+.body__contenedor__footer {
+    height: 190px;
+}
+
+.my_card_movil_consentimiento {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.my_card_movil_consentimiento label {
+    text-align: justify;
+    font-size: 15px;
+    line-height: normal;
+}
+
+.my_card_movil_footer {
+    font-size: 15px;
+    line-height: normal;
+}
+
+.bton-third {
+    cursor: not-allowed !important;
+}
+
+.popup-body-titulo img{
+    width: 80px; 
+    height: auto;
+}
+
+.popup-body-titulo p{
+    font-size: 20px !important;
+}
+
+.popup-body-list{
+    width: 65%; 
+    list-style-type: disc;
+}
+
+/* Responsive Web */
+@media screen and (min-width: 344px) {
+
+    .main__right h2 {
+        padding: 0 1rem 0.5rem !important;
+    }
+
+    .my__header {
+        display: none; 
+    }
+
+    .my__header__movil {
+        display: flex; 
+    }
+
+    .my__layout .my_card {
+        display: none;
+    }
+
+    .my_card_movil {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+
+    .popup-body-titulo img{
+        width: 70px; 
+        height: auto;
+    }
+
+    .popup-body-titulo p{
+        font-size: 17px !important;
+    }
+
+    .popup-body-list{
+        width: 75%; 
+        list-style-type: disc;
+    }
+}
+
+
+@media screen and (min-width: 768px) {
+
+    .main__right h2 {
+        padding: 0 3.2rem 0.5rem !important;
+    }
+
+    .my__header {
+        display: flex; 
+    }
+
+    .my__header .my__title {
+        width: 50%;
+    }
+
+    .my__header__movil {
+        display: none; 
+    }
+
+    .my__layout .my_card {
+        display: flex;
+        width: 95% !important;
+    }
+
+    .my__layout .my_card .my__card__body .card__body__contenedor {
+        height: 700px;
+    }
+
+    .body__contenedor__headder {
+        height: 200px;
+    }
+
+    .body__contenedor__footer {
+        height: 210px;
+    }
+    .body__contenedor__consentimiento {
+        height: 80px;
+    }
+
+    .body__contenedor__footer {
+        height: 210px;
+    }
+
+    .my_card_movil {
+        display: none;
+    }
+
+    .popup-body-titulo img{
+        width: 80px; 
+        height: auto;
+    }
+
+    .popup-body-titulo p{
+        font-size: 20px !important;
+    }
+
+    .popup-body-list{
+        width: 65%; 
+        list-style-type: disc;
+    }
+}
+
+@media screen and (min-width: 853px) {
+
+    .main__right h2 {
+        padding: 0 3.2rem 0.5rem !important;
+    }
+
+    .my__header {
+        display: flex; 
+    }
+
+    .my__header .my__title {
+        width: 40%;
+    }
+
+    .my__header__movil {
+        display: none; 
+    }
+
+    .body__contenedor__headder {
+        height: 225px;
+    }
+
+    .popup-body-titulo img{
+        width: 80px; 
+        height: auto;
+    }
+
+    .popup-body-titulo p{
+        font-size: 20px !important;
+    }
+
+    .popup-body-list{
+        width: 65%; 
+        list-style-type: disc;
+    }
+}
+
+@media screen and (min-width: 912px) {
+
+    .main__right h2 {
+        padding: 0 3.2rem 0.5rem !important;
+    }
+
+    .my__header .my__title {
+        width: 40%;
+    }
+
+    .my__header {
+        display: flex; 
+    }
+
+    .my__header__movil {
+        display: none; 
+    }
+
+    .body__contenedor__headder {
+        height: 240px;
+    }
+
+    .popup-body-titulo img{
+        width: 80px; 
+        height: auto;
+    }
+
+    .popup-body-titulo p{
+        font-size: 20px !important;
+    }
+
+    .popup-body-list{
+        width: 65%; 
+        list-style-type: disc;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+
+    .main__right h2 {
+        padding: 0 3.2rem 0.5rem !important;
+    }
+
+    .my__header .my__title {
+        width: 40%;
+    }
+
+    .my__header {
+        display: flex; 
+    }
+
+    .my__header__movil {
+        display: none; 
+    }
+
+    .body__contenedor__headder {
+        height: 260px;
+    }
+
+    .popup-body-titulo img{
+        width: 80px; 
+        height: auto;
+    }
+
+    .popup-body-titulo p{
+        font-size: 20px !important;
+    }
+
+    .popup-body-list{
+        width: 65%; 
+        list-style-type: disc;
+    }
+}
+
+@media screen and (min-width: 1224px) {
+
+    .main__right h2 {
+        padding: 0 3.2rem 0.5rem !important;
+    }
+
+    .my__header .my__title {
+        width: 40%;
+    }
+
+    .my__header {
+        display: flex; 
+    }
+
+    .my__header__movil {
+        display: none; 
+    }
+
+    .my__layout .my_card {
+        display: flex;
+        width: 85% !important;
+    }
+
+    .my__layout .my_card .my__card__body .card__body__contenedor {
+        height: 585px;
+    }
+
+    .body__contenedor__headder {
+        height: 215px;
+    }
+
+    .body__contenedor__consentimiento {
+        height: 50px;
+    }
+
+    .body__contenedor__footer {
+        height: 190px;
+    }
+
+    .my_card_movil {
+        display: none;
+    }
+
+    .popup-body-titulo img{
+        width: 80px; 
+        height: auto;
+    }
+
+    .popup-body-titulo p{
+        font-size: 20px !important;
+    }
+
+    .popup-body-list{
+        width: 65%; 
+        list-style-type: disc;
+    }
+}

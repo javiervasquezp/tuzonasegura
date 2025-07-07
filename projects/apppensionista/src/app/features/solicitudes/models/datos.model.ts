@@ -1,0 +1,30 @@
+export class DatosUsuario {
+    TipoDocumento: string = "";
+    NumeroDocumento: string = "";
+    Nombres: string = "";
+    NombreCompleto: string = "";
+    Telefono: string = "";
+    Celular: string = "";
+    Correo: string = "";
+    Direccion: string = "";
+    IdDepartamento: string = "";
+    IdProvincia: string = "";
+    IdDistrito: string = "";
+    Departamento: string = "";
+    Provincia: string = "";
+    Distrito: string = "";
+    FacilitacionADM: boolean = false;
+    isDeclarionJurada: boolean = false;
+    MotivoDesc: string = "";
+    MotivoCOD: string = "";
+    DetalleSolicitud: string = "";
+    Cobertura: string = "";
+    AutorizoCasilla: boolean = false;
+    AutorizoCorreo: boolean = false;
+    CodPaisNacionalidad: string = "PER";
+    PaisNacionalidad: string = "";
+    ResidoExtranjero: boolean = false;
+    CodPaisResidencia: string = "";
+    PaisResidencia: string = "";
+    Ubigeo: string = "";
+}

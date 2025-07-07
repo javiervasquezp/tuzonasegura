@@ -1,0 +1,97 @@
+<div class="main__right">
+    <h2 class="titulo-form-icono" >
+        <img loading="lazy" src="~/../assets/images/icon-home-menu.svg" alt="icon doc"> Actualizar mis datos
+         
+    </h2>
+    <app-alerta *ngIf="warning.length > 0" [msg]="warning"></app-alerta>
+    <div class="detail">
+        <app-usuario></app-usuario>
+        <div class="detail__page detail__page--big">
+            <form  *ngIf="isActivate"><!-- [formGroup]="pagoForm" -->
+                <div   class="wrapper__form">
+                    <div class="form-row no-gutters mt-5">
+                        <div class="col-12">
+                            <label>Correo electrónico(*)</label>
+                            <input type="text" id="txtCorreo" name="txtCorreo" class="form-control" [(ngModel)]="model.Correo" 
+                            (keyup)="utilitario.emailValidator(model.Correo) == false ? emailValid = false : emailValid = true"
+                              maxlength="100"
+                              />
+                        </div>
+                    </div>
+                    <div class="form-row no-gutters">
+                        <div class="col-12">
+                            <label>Celular(*)</label>
+                            <input type="text" id="txtCelular" name="txtCelular" class="form-control" [(ngModel)]="model.Celular" (keypress)="utilitario.numberOnly($event)" maxlength="9" />
+                        </div>
+                    </div>
+                    <fieldset *ngIf="model.EsAntiguo">
+                        <div class="form-row no-gutters">
+                            <div class="col-12 rounded-pill">
+                                <label>Teléfono fijo</label>
+                                <input type="text" id="txtFijo" name="txtFijo" class="form-control" [(ngModel)]="model.TelefonoFijo" (keypress)="utilitario.numberOnly($event)" maxlength="20" minlength="5"/>
+                            </div>
+                        </div>
+                        <div class="form-row no-gutters">
+                            <div class="col-12">
+                                <label>Dirección</label>
+                                <input type="text" id="txtDireccion" name="txtDireccion" class="form-control" [(ngModel)]="model.Direccion" placeholder="Ejemplo: Av. Los Ceres 203" maxlength="250" />
+                                <label class="info-label">(Especificar Av./Calle/Jr./Psje/Mz./Dep/Nº/Lote/Urb, Dirección)</label>
+                            </div>
+                        </div>
+                        <div class="form-row no-gutters">
+                            <div class="col-12 col-md-4 col-lg-4">
+                                <label>Departamento</label>
+                                <select class="form-control rounded-pill"
+                                   id="slcdepartamento" name="slcdepartamento"  [(ngModel)]="model.UbigeoDepartamento" (change)="slcDepartamentoChange()">
+                                    <option value="">--Selecciona una opción--</option>
+                                    <ng-container *ngFor="let dep of ListaDepartamentos"  >
+                                        <option [value]="dep.IdDepartamento">{{dep.DescripcionDepartamento}}</option> 
+                                    </ng-container>     
+                                </select>
+                            </div>
+                            <div class="col-12 col-md-4 col-lg-4">
+                                <label>Provincia</label>
+                                <select class="form-control rounded-pill" 
+                                  id="slcprovincia" name="slcprovincia"   [(ngModel)]="model.UbigeoProvincia" (change)="slcProvinciaChange()">
+                                    <option value="">--Selecciona una opción--</option>
+                                    <ng-container *ngFor="let dep of ListaProvincias"  >
+                                        <option [value]="dep.IdProvincia">{{dep.DescripcionProvincia}}</option> 
+                                    </ng-container>     
+                                </select>
+                            </div>
+                            <div class="col-12 col-md-4 col-lg-4">
+                                <label>Distrito</label>
+                                <select   class="form-control rounded-pill"  
+                                  id="slcdistrito" name="slcdistrito"   [(ngModel)]="model.UbigeoDistrito">
+                                    <option value="">--Selecciona una opción--</option>
+                                    <ng-container *ngFor="let dep of ListaDistritos"  >
+                                        <option [value]="dep.IdDistrito">{{dep.DescripcionDistrito}}</option> 
+                                    </ng-container>   
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row no-gutters">
+                            <div class="col-12">
+                                <label>Referencia de la dirección (máximo 500 caracteres)</label>
+                                <textarea  class="form-control" 
+                                  id="txtreferencia" name="txtreferencia" rows="3"  maxlength="500" [(ngModel)]="model.ReferenciaDireccion" ></textarea>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <br>
+                    <div class="form-row no-gutters">
+                        <div class="col-12 col-md-6 offset-md-6 d-flex justify-content-center justify-content-sm-end">
+                            <button type="button" (click)="cancelar()" class="bton bton-third">Cancelar</button>
+                            <button type="button" (click)="save()" class="bton bton-second">Guardar</button>
+                        </div>
+                    </div>
+                    <div class="form-row no-gutters">
+                        <div class="col-12">
+                           <label style="text-align: justify;">Los campos con (*) son obligatorios.</label>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

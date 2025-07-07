@@ -1,0 +1,166 @@
+<div class="main__right">
+    <h2 ><img loading="lazy" src="~/../assets/images/icon-autorizar-datos.svg" alt="icon doc" > Autorizar mis datos con entidades financieras</h2>
+    <app-alerta *ngIf="warning.length > 0" [msg]="warning"></app-alerta>
+    <div class="detail" *ngIf="autorizadoFlag">
+        <app-usuario></app-usuario>
+        <div class="detail__page">
+            <br>
+            <div class="form-row no-gutters">
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="chk-policy2" [(ngModel)]="model.esAutorizacion">
+                    <label class="custom-control-label" for="chk-policy2"> Autorizo compartir mis datos personales y la información de mis ingresos y egresos
+                        en los últimos 12 meses.</label>
+                </div>
+            </div>
+            <div class="form-row no-gutters mt-3">
+                <label class="col-lg-4 col-md-12"></label>
+                <div class="form__right" style="width: 100%;">
+                    <select class="col-lg-8 col-md-12 form-control rounded-pill" [(ngModel)]="model.regimen" (change)="slcRegimenChange()">
+                        <option [value]="item.desRegimen" *ngFor="let item of listaRegimenes">
+                            {{item.desRegimen == '20530' ? "Pensiones por Encargo" : "Régimen " + item.desRegimen}}
+                        </option>
+                    </select>
+                </div>
+               
+            </div>
+            <label class="row col-lg-12 col-md-12">Selecciona la entidad financiera que deseas autorizar</label>
+            <div class="form-row no-gutters mt-3">
+                <select class="col-lg-12 col-md-12 form-control rounded-pill" [(ngModel)]="model.codigoCooperativa" (change)="slcEntidadChange()">
+                    <option value="">Selecciona</option>
+                    <option [value]="item.CodigoCooperativa" *ngFor="let item of listaCooperativa">{{item.DescripcionCooperativa}}</option>
+                </select>
+            </div>
+            <div class="form-row no-gutters mt-2 mb-4">
+                <div class="col-12">
+                    <button class="bton bton-second rounded-pill float-right" (click)="registrarAutorizacionClick()">Agregar</button>
+                </div>
+            </div>
+            <div class="table__desktop d-desktop" >
+                <div class="table__desktop--header" style="grid-template-columns: 32% 15% 15% 15% 15% 8%;padding: .7rem 1rem;">
+                    <span>Entidad financiera</span>
+                    <span>Régimen</span>
+                    <span>Estado</span>
+                    <span>Fecha inicio</span>
+                    <span>Fecha fin</span>
+                    <span>Cancelar</span>
+                </div>
+                <div *ngFor="let item of rows"
+                class="table__desktop--item" style="grid-template-columns: 32% 15% 15% 15% 15% 8%;">
+                    <span>{{item.DescCooperativa}}</span>
+                    <span>{{item.Regimen}}</span>
+                    <span>{{item.EstadoDesc}}</span>
+                    <span>{{datePipe.transform(item.FechaInicioAutorizacion,"dd-MM-yyyy")}}</span>
+                    <span>{{datePipe.transform(item.FechaFinAutorizacion,"dd-MM-yyyy")}}</span>
+                    <span  ><button *ngIf="item.Estado == '1'" (click)="cancelarAutorizacionClick(item)"
+                         class="btn btn-green"><i   aria-hidden="true" class="fa fa-times"></i></button></span>
+                   
+                </div>
+                <div *ngIf="rows.length==0"
+                class="table__desktop--item" style="grid-template-columns: none;">
+                    <span>No hay datos</span>                    
+                </div>
+                
+               <app-paginate 
+               [count]="totalRows"
+               [pagecount]="pagecount"
+               (pageHandler)="onClickPage($event)"
+                ></app-paginate>
+                
+            </div>
+
+            <div class="table__regimen d-movil">
+                <div 
+                *ngFor="let item of rows"
+                class="detail__row" style="grid-template-columns:none;">
+                    <table class="table">
+                        <tr>
+                            <td class="title-column">Entidad financiera</td>
+                            <td class="table__items_td">{{item.DescCooperativa}}</td>
+                        </tr>
+                        <tr>
+                            <td class="title-column">Régimen</td>
+                            <td class="table__items_td">{{item.Regimen}}</td>
+                        </tr>
+                        <tr>
+                            <td class="title-column">Estado</td>
+                            <td class="table__items_td">{{item.EstadoDesc}}</td>
+                        </tr>
+                        <tr>
+                            <td class="title-column">Fecha inicio</td>
+                            <td class="table__items_td">{{datePipe.transform(item.FechaInicioAutorizacion,"dd-MM-yyyy")}}</td>
+                        </tr>
+                        <tr>
+                            <td class="title-column">Fecha fin</td>
+                            <td class="table__items_td">{{datePipe.transform(item.FechaFinAutorizacion,"dd-MM-yyyy")}}</td>
+                        </tr>
+                        <tr *ngIf="item.Estado == '1'">
+                            <td class="title-column">Cancelar</td>
+                            <td class="table__items_td">
+                                <button
+                                (click)="cancelarAutorizacionClick(item)"
+                                 class="btn btn-green"><i   aria-hidden="true" class="fa fa-times"></i></button></td>
+                        </tr>
+                    </table>
+                    
+                     
+                </div>
+                
+                <div *ngIf="rows.length==0"
+                class="detail__row" style="grid-template-columns: none;">
+                    <span>No hay datos</span>                    
+                </div>
+                <app-paginate
+                [count]="totalRows"
+                [pagecount]="pagecount"
+                (pageHandler)="onClickPage($event)"
+                ></app-paginate>
+
+            </div>
+<!--
+            <div class="row">
+                <div class="col-12">
+                    <ngx-datatable
+                    class="material"
+                    [rows]="rows"
+                    [loadingIndicator]="loadingIndicator"
+                    [headerHeight]="50"
+                    [footerHeight]="50"
+                    rowHeight="auto"
+                    [reorderable]="reorderable"
+                    [externalPaging]="true"
+                    [count]="totalRows"
+                    [offset]="page.Pagina-1"
+                    [limit]="page.Tamanio"
+                    (page)="setPage($event)"
+                    [columnMode]="'force'"
+                  >
+                    <ngx-datatable-column name="Entidad financiera" prop="DescCooperativa"></ngx-datatable-column>
+                    <ngx-datatable-column name="Régimen" prop="Regimen"></ngx-datatable-column>
+                    <ngx-datatable-column name="Estado" prop="Estado"></ngx-datatable-column>
+                    <ngx-datatable-column name="Fecha inicio" prop="">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            {{datePipe.transform(row.FechaInicioAutorizacion,"dd-MM-yyyy")}}
+                          </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="Fecha fin" prop="">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            {{datePipe.transform(row.FechaFinAutorizacion,"dd-MM-yyyy")}}
+                          </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="Cancelar" prop="">
+                      <ng-template let-row="row" ngx-datatable-cell-template>
+                        <button class="btn btn-green" (click)="cancelarAutorizacionClick(row)" *ngIf="row.Estado == 'Activo'"><i class="fa fa-times" aria-hidden="true"></i></button>
+                      </ng-template>
+                    </ngx-datatable-column>
+                  </ngx-datatable>
+                </div>
+            </div>-->
+            <br>
+            <div class="row">
+                <div class="col-12">
+                    <p class="texto-small">Recuerda que puedes cancelar la autorización para compartir tu información en cualquier momento, haciendo clic en el icono  <span class="ml-2"><i class="fas fa-times"></i></span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

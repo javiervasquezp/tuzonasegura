@@ -1,0 +1,39 @@
+@media screen and (max-width: 336px) {
+    .bton-second{
+        display: inherit;
+    }
+}
+
+.resaltado{
+    background-color: #d4e0e3;
+    border-radius: 10px;
+    padding-top: 8px;
+}
+
+.resaltado label{
+    text-align: justify;
+    margin-right: 1rem;
+}
+
+.main__right h2 a {
+    font-size: .7rem !important;
+}
+
+.main__right h2 a:hover {
+    text-decoration: underline;
+}
+
+
+.div-guias{
+    text-align: center;
+}
+
+#imgPDF {
+    width: 25px !important;
+    margin-right: 0px !important;
+    margin-bottom: 5px;
+}
+
+.guia{
+    margin-bottom: 1px;
+}

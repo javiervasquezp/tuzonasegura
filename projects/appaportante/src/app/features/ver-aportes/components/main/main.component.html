@@ -1,0 +1,19 @@
+<div class="main__right">
+    <h2 ><img loading="lazy" src="~/../assets/images/icon-doc.svg" alt="icon doc" > {{sharedconstants.Titulos.VerAportes}}</h2>
+    <app-alerta *ngIf="warning != null && warning.length > 0" [msg]="warning"></app-alerta>
+    <div class="detail">
+        <app-usuario></app-usuario>
+        <div class="detail__page mt-5">
+            <p>En esta opción podrás encontrar tus aportes acreditados al SNP.</p>
+        </div>
+        <div class="mt-5" (click)="descargarReporte()">
+            <a class="bton bton-second p-3"><b>Estado de cuenta en línea</b></a>
+        </div>
+        <div class="detail__page mt-5">
+            <p>(Para visualizar este archivo debes contar con Acrobat Reader. Si no dispones de este, <span><a href="https://get.adobe.com/es/reader/" target="_blank">haga clic aquí</a></span>)</p>
+        </div>
+        <div class="detail__page">
+            <p>La información proporcionada es solo para fines de consulta, carece de valor legal.</p>
+        </div>
+    </div>
+</div>

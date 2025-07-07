@@ -1,0 +1,21 @@
+.page_active{
+    background: #e2ebed;
+}
+.page_button{
+    cursor: pointer; 
+    color: #6c757d;border: 0; 
+    border-radius: 9px;
+}
+.page_img{
+    cursor:pointer;    
+    width: 16px;
+    margin-right: .3rem;
+}
+.page_img_small{
+    cursor:pointer;    
+    width: 12px;
+    margin-right: .3rem;
+}
+.page_img_disenable{
+    opacity: 0.5;
+}

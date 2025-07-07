@@ -1,0 +1,5 @@
+<div class="date__publish">
+    <p [ngStyle]="{'text-align':isVisibleFechaActual === false ? 'initial' : '' }" >Fecha de consulta: {{fechaconsulta}}</p>
+    <p *ngIf="fechaActual=='' && isVisibleFechaActual">Fecha de última actualización: {{fechaactualizacion}}</p>
+    <p *ngIf="fechaActual!='' && isVisibleFechaActual">Fecha de última actualización: {{fechaActual}}</p>
+</div>

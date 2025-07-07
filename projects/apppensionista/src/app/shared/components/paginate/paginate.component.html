@@ -1,0 +1,28 @@
+<nav aria-label="Page navigation example" style="border-top: 1px solid #6f9ba4;margin-top: 1rem;padding-top: 1rem;">
+                    
+    <ul class="pagination justify-content-end" style="font-size: 1rem;justify-content: center !important;">
+      <li [className]="paginaPosition==0 ? 'page-item disabled' : 'page-item'"  >
+        <a   (click)="onClickInicio()" class="page-link page_button"  tabindex="-1"> 
+            <img [className]="paginaPosition==0 ? 'page_img page_img_disenable' : 'page_img'"  loading="lazy" src="~/../assets/images/pagination/icon-ini.svg" alt="ini">
+        </a>
+      </li>
+      <li [className]="paginaPosition==0 ? 'page-item disabled' : 'page-item'" >
+        <a  (click)="onClickAnterior()" class="page-link page_button"  tabindex="-1"> 
+            <img [className]="paginaPosition==0 ? 'page_img_small page_img_disenable' : 'page_img_small'"     loading="lazy" src="~/../assets/images/pagination/icon-after.svg" alt="ini">
+        </a>
+      </li>
+      <li *ngFor="let page of ListPag" class="page-item">
+          <a   [className]="page==paginaPosition ? 'page-link page_button page_active' : 'page-link page_button'"
+           (click)="onClickHandler(page)"  >{{page+1}}</a>
+        </li> 
+      <li [className]="paginaPosition==cantidadBotones-1 ? 'page-item disabled' : 'page-item'">
+        <a   (click)="onClickSiguiente()"  class="page-link page_button"   tabindex="-1">
+            <img [className]="paginaPosition==cantidadBotones-1 ? 'page_img_small page_img_disenable' : 'page_img_small'" loading="lazy" src="~/../assets/images/pagination/icon-next.svg" alt="ini"></a>
+      </li>
+      <li [className]="paginaPosition==cantidadBotones-1 ? 'page-item disabled' : 'page-item'" >
+        <a   (click)="onClickFinal()"  class="page-link page_button"   tabindex="-1">
+            <img [className]="paginaPosition==cantidadBotones-1 ? 'page_img page_img_disenable' : 'page_img'"   loading="lazy" src="~/../assets/images/pagination/icon-fin.svg" alt="ini"></a>
+      </li>
+    </ul>
+    
+  </nav>

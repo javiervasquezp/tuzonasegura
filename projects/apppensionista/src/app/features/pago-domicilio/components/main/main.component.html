@@ -1,0 +1,244 @@
+<div class="main__right">
+    <h2 class="titulo-form-icono" >
+        <img loading="lazy" src="~/../assets/images/icon-home.svg" alt="icon doc"> Solicitar pago a domicilio
+        
+        <div class="div-guias">
+            <img src="~/../assets/images/icon-pdf.svg" id="imgPDF" ><br>
+            <a href="https://www.onp.gob.pe/Documents/guiapagoadomicilio.pdf" class="guia" target="_blank">Ver guía en español</a>
+            <a href="https://www.onp.gob.pe/Documents/guiapagoadomicilioquechua.pdf" target="_blank">Ver guía en quechua</a>
+        </div>
+    </h2>
+    <div class="detail">
+        <app-usuario></app-usuario>
+        <div class="detail__page detail__page--big">
+            <p>Recibe tu pensión desde la <b>seguridad de tu hogar</b>. Recuerda que todos nuestros servicios son gratuitos.</p>
+            <p>Antes de continuar con tu solicitud, es necesario que leas con atención y declares estar conforme con las condiciones de nuestro servicio:</p>
+            <ul>
+                <li [innerHTML]="MensajeParrafoSharepoint" ></li>
+                <li>Debes saber que la entrega de tu pensión se realizará dentro de un rango de diez (10) días calendario según el cronograma de pagos establecido por la ONP pudiéndose extender por motivos excepcionales.</li>
+                <li>La ONP abrirá ante el Banco de la Nación una nueva cuenta de ahorros a tu nombre; por esta razón, en la primera visita y por única vez, deberás firmar los documentos para formalizar esta gestión.</li>
+                <li>Los pagadores debidamente identificados, efectuarán hasta un máximo de dos (2) visitas. Por tu seguridad, estas no se realizarán en un día u horario específico. Ten en cuenta que deberás mostrar tu documento de identidad.</li>
+            </ul>
+            <div class="custom-control custom-checkbox">
+                <input (change)="onCheckboxChange($event)" type="checkbox" class="custom-control-input" id="chk-policy">
+                <label class="custom-control-label label-policy" for="chk-policy">Declaro que he leído y estoy conforme con las características del servicio.</label>
+            </div>
+            <div class="cronograma">
+                <a href="https://www.gob.pe/10952-cronograma-de-pago-del-pensionista" target="_blank"  class="bton bton-second">Conoce el cronograma de pago</a>
+            </div>
+            <form  *ngIf="isActivate"><!-- [formGroup]="pagoForm" -->
+                <app-alerta *ngIf="warning.length > 0" [msg]="warning"></app-alerta>
+                <div   class="wrapper__form">
+                    <h3 class="title__form">Mis datos</h3>
+                    <div class="form-row no-gutters">
+                        <div class="col-6 col-md-4">
+                            <label>Tipo de documento (*)</label>
+                            <input disabled type="text" class="form-control input-dni" [value]="tipoDocumento" placeholder="Tipo de documento"  />
+                        </div>
+                        <div class="col-6 col-md-4">
+                            <label>Número de documento (*)</label>
+                            <input disabled type="text" class="form-control input-dni" [value]="numeroDocumento" placeholder="Nro." maxlength="8" />
+                        </div>
+                    </div>
+                    <div class="form-row no-gutters">
+                        <div class="col-12 rounded-pill">
+                            <label>Nombres y apellidos (*)</label>
+                            <input disabled type="text" class="form-control" [value]="nombreCompleto" />
+                        </div>
+                    </div>
+                    <div class="form-row no-gutters">
+                        <div class="col-6 col-md-4">
+                            <label>País de nacionalidad (*)</label>
+                            <select [(ngModel)]="model.CodPaisNacionalidad"
+                            [ngClass]="submitted==true && model.CodPaisNacionalidad == '' ? 'form-control rounded-pill form-required' : 'form-control rounded-pill'" name="slcNacionalidad">
+                                <option selected="selected" value="">--Selecciona una opción--</option>
+                                <ng-container *ngFor="let dep of ListaPaises">
+                                    <option [value]="dep.Codigo">{{dep.Titulo}}</option>
+                                </ng-container>  
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row no-gutters">
+                        <div class="col-6 col-md-4 mb-0">
+                            <label>Celular (*)</label>
+                            <input type="text" class="form-control" [(ngModel)]="datosPensionista.Celular" [disabled]="deshabilitarCelular"
+                            [ngClass]="submitted==true && datosPensionista.Celular == '' ? 'form-control form-required' : 'form-control'" name="txtCelular"/>
+                        </div>
+                        <div class="col-6 col-md-4 mb-0">
+                            <label>Fijo</label>
+                            <input type="text" class="form-control" [(ngModel)]="datosPensionista.Telefono" [disabled]="deshabilitarTelefijo" name="txtFijo" />
+                        </div>
+                      <!-- <span class="small-info">Un teléfono de contacto es obligatorio</span> -->  
+                    </div>
+                    <div class="form-row no-gutters">
+                        <div class="col-12">
+                            <label>Correo electrónico (*)</label>
+                            <input type="text" class="form-control" [(ngModel)]="datosPensionista.Correo" [disabled]="deshabilitarCorreo"
+                            [ngClass]="submitted==true && datosPensionista.Correo == '' ? 'form-control form-required' : 'form-control'" name="txtCorreo"/>
+                        </div>
+                    </div>
+                    <div class="form-row no-gutters">
+                        <div class="col-12">
+                            <button type="button" (click)="irActualizarDatos()" class="bton bton-second">Actualizar correo electrónico o celular</button>
+                        </div>
+                    </div>
+                    <div class="form-row no-gutters">
+                        <div class="col-12">
+                            <label>Dirección</label>
+                            <input disabled type="text" class="form-control" [value]="datosPensionista.Direccion" />
+                        </div>
+                    </div>
+                    <div class="form-row no-gutters">
+                        <div class="col-lg-4 col-md-4">
+                            <label>Departamento</label>
+                            <select disabled class="form-control rounded-pill"  >
+                                <option value="">--Selecciona una opción--</option>
+                                <ng-container *ngFor="let dep of ListaDepartamentos"  >
+                                    <option [value]="dep.IdDepartamento" selected="selected" *ngIf="dep.IdDepartamento==datosPensionista.Departamento"  >{{dep.DescripcionDepartamento}}</option> 
+                                    <option [value]="dep.IdDepartamento"  *ngIf="dep.IdDepartamento!=datosPensionista.Departamento"  >{{dep.DescripcionDepartamento}}</option> 
+                                </ng-container>                               
+                            </select>
+                        </div>
+                        <div class="col-lg-4 col-md-4">
+                            <label>Provincia</label>
+                            <select disabled class="form-control rounded-pill"   >
+                                <option value="">--Selecciona una opción--</option>
+                                <ng-container *ngFor="let dep of ListaProvincias"  >
+                                    <option [value]="dep.IdProvincia"  selected="selected"  *ngIf="dep.IdProvincia==datosPensionista.Provincia" >{{dep.DescripcionProvincia}}</option> 
+                                    <option [value]="dep.IdProvincia"    *ngIf="dep.IdProvincia!=datosPensionista.Provincia" >{{dep.DescripcionProvincia}}</option> 
+                                </ng-container>  
+                            </select>
+                        </div>
+                        <div class="col-lg-4 col-md-4">
+                            <label>Distrito</label>
+                            <select  disabled class="form-control rounded-pill" >
+                                <option value="">--Selecciona una opción--</option>
+                                <ng-container *ngFor="let dep of ListaDistritos"  >
+                                    <option [value]="dep.IdDistrito" selected="selected"  *ngIf="dep.IdDistrito==datosPensionista.Distrito" >{{dep.DescripcionDistrito}}</option> 
+                                    <option [value]="dep.IdDistrito"    *ngIf="dep.IdDistrito!=datosPensionista.Distrito" >{{dep.DescripcionDistrito}}</option> 
+                                </ng-container>  
+                            </select>
+                        </div>
+                    </div>
+                    <span class="spacing"></span>
+                    <h3 class="title__form">Tipo de notificación electrónica (*)</h3>
+                    <div class="form-row no-gutters">
+                        <div class="form-check">
+                            <input type="radio" name="radioTipoNotifi" id="radioTipoNotifi1" (change)="onItemChangeCasilla($event)"
+                            [checked]="model.AutorizoCasilla" [ngClass]="submitted==true && (!model.AutorizoCorreo && !model.AutorizoCasilla) ? 'form-check-input form-required' : 'form-check-input'">
+                            <label class="form-check-label" for="radioTipoNotifi1">
+                                Casilla electrónica
+                            </label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="chk-policy5" name="chkAutorizo" [checked]="checkAutorizo" disabled>
+                            <label class="custom-control-label label-policy" for="chk-policy5">
+                                Luego de haber dado lectura al texto anterior, <b>AUTORIZO</b> a la ONP que las resoluciones,
+                                esquelas, notificaciones, cuadros de aportes, hojas de regularización, liquidación de
+                                intereses/devengados, hojas de cuantía de pensión y comunicaciones en general, en
+                                respuesta a mis solicitudes, sean <b>NOTIFICADAS</b> a través de mi casilla electrónica.                                        
+                            </label>
+                        </div>
+                    </div>
+                    <div *ngIf="model.AutorizoCorreo" class="form-row no-gutters">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="radioTipoNotifi" id="radioTipoNotifi2"
+                            [checked]="model.AutorizoCorreo">
+                            <label class="form-check-label" for="radioTipoNotifi2">
+                              Correo electrónico
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <label class="form-check-label" style="text-align: justify">
+                                Antes de enviar tu solicitud, recuerda que todas las notificaciones serán enviadas al correo electrónico registrado. Por favor, verifica regularmente tu bandeja de entrada o de correo no deseado.<br><br>
+                                Si no podemos notificarte por correo electrónico, lo haremos en el domicilio que registres en la sección “Lugar de pago”.
+                            </label>
+                        </div>
+                    </div>
+                    <span class="spacing"></span>
+                    <h3 class="title__form">Lugar de pago</h3>
+                    <div class="form-row no-gutters">
+                        <div class="custom-control custom-checkbox">
+                            <input [disabled]="isDisabledLugarPago"  [(ngModel)]="isDisabledVariable" type="checkbox" (change)="onCheckboxDireccionChange($event)" class="custom-control-input" id="chk-policy2">
+                            <label class="custom-control-label label-policy" for="chk-policy2"> Utilizar la misma dirección de Mis datos.</label>
+                        </div>
+                    </div>
+                    <div class="form-row no-gutters">
+                        <div class="col-12">
+                            <label>Dirección (*)</label>
+                            <input   autocomplete="off" [ngClass]="submitted==true && model.Direccion != '' ? 'form-control' : 'form-control form-required'"   
+                            [disabled]="isDisabledVariable" type="text"  id="txtdireccion" name="txtdireccion"  maxlength="255" [(ngModel)]="model.Direccion" />
+                        </div>
+                    </div>
+                    <div class="form-row no-gutters">
+                        <div class="col-lg-4 col-md-4">
+                            <label>Departamento (*)</label>
+                            <select [ngClass]="submitted==true && model.IdDepartamento != '' ? 'form-control rounded-pill' : 'form-control rounded-pill form-required'" 
+                              [disabled]="isDisabledVariable" id="slcdepartamento" name="slcdepartamento"  [(ngModel)]="model.IdDepartamento" (change)="slcDepartamentoChange()" >
+                                <option value="">--Selecciona una opción--</option>
+                                <ng-container *ngFor="let dep of ListaDepartamentosDP"  >
+                                    <option [value]="dep.IdDepartamento">{{dep.DescripcionDepartamento}}</option> 
+                                </ng-container>     
+                            </select>
+                        </div>
+                        <div class="col-lg-4 col-md-4">
+                            <label>Provincia (*)</label>
+                            <select   [ngClass]="submitted==true && model.IdProvincia != '' ? 'form-control rounded-pill' : 'form-control rounded-pill form-required'" 
+                              [disabled]="isDisabledVariable" id="slcprovincia" name="slcprovincia"   [(ngModel)]="model.IdProvincia" (change)="slcProvinciaChange()">
+                                <option value="">--Selecciona una opción--</option>
+                                <ng-container *ngFor="let dep of ListaProvinciasDP"  >
+                                    <option [value]="dep.IdProvincia">{{dep.DescripcionProvincia}}</option> 
+                                </ng-container>     
+                            </select>
+                        </div>
+                        <div class="col-lg-4 col-md-4">
+                            <label>Distrito (*)</label>
+                            <select   [ngClass]="submitted==true && model.IdDistrito != '' ? 'form-control rounded-pill' : 'form-control rounded-pill form-required'" 
+                              [disabled]="isDisabledVariable" id="slcdistrito" name="slcdistrito"   [(ngModel)]="model.IdDistrito">
+                                <option value="">--Selecciona una opción--</option>
+                                <ng-container *ngFor="let dep of ListaDistritosDP"  >
+                                    <option [value]="dep.IdDistrito">{{dep.DescripcionDistrito}}</option> 
+                                </ng-container>   
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row no-gutters">
+                        <div class="col-12">
+                            <label>Referencia de la dirección (máximo 500 caracteres)(*)</label>
+                            <textarea  [ngClass]="model.submitted==true && model.Referencia != '' ? 'form-control' : 'form-control form-required'" 
+                              id="txtreferencia" name="txtreferencia"   rows="3"  maxlength="500" [(ngModel)]="model.Referencia" ></textarea>
+                        </div>
+                        <span class="small-info">(*) Datos de ingreso obligatorio.</span>
+                    </div>
+                    <div class="form-row no-gutters">
+                        <div class="custom-control custom-checkbox resaltado">
+                            <input  class="custom-control-input" name="chkFacilitacionADM"
+                             type="checkbox"   id="chk-policy4"  [(ngModel)]="model.FacilitacionADM" >
+                            <label class="custom-control-label label-policy" for="chk-policy4"><b>Solicito atención preferente</b><br>Marca esta casilla si tienes dificultades para movilizarte de manera independiente o si sufres de alguna discapacidad sensorial, mental o física, que impida tu movilidad de manera normal<br>(D.S. Nº 017-2021-MIMP).</label>
+                        </div>
+                    </div>
+                    <div class="form-row no-gutters">
+                        <div class="custom-control custom-checkbox">
+                            <input  [ngClass]="submitted==true && model.IsDeclarionJurada==true ? 'custom-control-input' : 'custom-control-input form-required'" 
+                             type="checkbox"   id="chk-policy3"  [(ngModel)]="model.IsDeclarionJurada" name="chkDeclaracionJurada">
+                            <label class="custom-control-label label-policy" for="chk-policy3">Declaro que los datos e información registrados en la presente solicitud son verdaderos, se ajustan a la realidad y autorizo a la ONP que me notifique el resultado de mi solicitud al correo electrónico ingresado.</label>
+                        </div>
+                    </div>
+                    <div class="form-row no-gutters">
+                        <div class="col-12">
+                           <label style="text-align: justify;"> <b>Ten en cuenta que todas las notificaciones serán enviadas según la notificación electrónica seleccionada. Si elegiste correo electrónico, verifica regularmente tu bandeja de entrada o de correo no deseado.</b>
+                           </label>
+                        </div>
+                         
+                    </div>
+                    <div class="form-row no-gutters">
+                        <div class="col-12 col-md-6 offset-md-6 d-flex justify-content-center justify-content-sm-end">
+                            <button type="button" (click)="limpiarControl()" class="bton bton-third">Limpiar</button>
+                            <button *ngIf="model.IsDeclarionJurada" type="button" (click)="save()" class="bton bton-second">Enviar</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

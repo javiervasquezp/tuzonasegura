@@ -1,0 +1,21 @@
+<div class="modal" style="display:block;"  >
+    <div class="modal-dialog modal-dialog-centered popup__wrapper" role="document">
+      <div class="modal-content zona__popup">
+        <div class="modal-header">
+          <h5 class="modal-title">
+            <img src="~/../../../../assets/images/icon-user.svg" alt="User">
+            {{titulo}}
+          </h5>
+        </div>
+        <div class="modal-body">
+           <img src="~/../../../../assets/images/icon-check.png" alt="Check">
+           <div style="display: grid;" class="row" [innerHTML]="body">
+            
+           </div>
+           <div class="row"> 
+               <div class="col-12"><a class="bton bton-second" (click)="onClickHandler()"  >{{botonNombre}}</a></div>                        
+            </div>            
+        </div>
+      </div>
+    </div>
+</div>

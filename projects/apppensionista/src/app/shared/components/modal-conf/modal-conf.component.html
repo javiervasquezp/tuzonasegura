@@ -1,0 +1,25 @@
+<div class="modal" style="display:block;"  >
+    <div class="modal-dialog modal-dialog-centered popup__wrapper" role="document" data-keyboard="false">
+      <div class="modal-content zona__popup">
+        <!-- <div class="modal-header">
+            <h5 class="modal-title">
+              {{titulo}}
+            </h5>
+        </div> -->
+        <div class="modal-body">
+           <div class="row">
+                <div [innerHTML]="body"></div>
+           </div>
+            <div class="form-row no-gutters btn-modal">
+                <div style="padding-bottom: 10px;" class="col-lg-5 col-md-6  d-flex justify-content-center">
+                  <button style="width: 80%;"  type="button" (click)="cancelarClick()" class="bton bton-third">{{btnNameNo}}</button> 
+                </div>
+                <div style="padding-bottom: 10px;" class="col-lg-5 col-md-6  d-flex justify-content-center">
+                  <button style="width: 80%;"  type="button" (click)="aceptarClick()"  class="bton bton-second">{{btnNameSi}}</button>
+                </div>
+             </div>
+             
+        </div>
+      </div>
+    </div>
+</div>

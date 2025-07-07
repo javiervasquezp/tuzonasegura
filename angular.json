@@ -1,0 +1,572 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "TuZonaSegura": {
+      "root": "",
+      "sourceRoot": "src",
+      "projectType": "application",
+      "schematics": { "@schematics/angular:application": { "strict": true } },
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "ngx-build-plus:browser",
+          "options": {
+            "commonChunk": false,
+            "outputPath": "dist/TuZonaSegura",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "src/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              { "glob": "favicon.ico", "input": "src", "output": "/" },
+              { "glob": "**/*", "input": "src/assets", "output": "/assets" },
+              { "glob": "**/*", "input": "src/img", "output": "/img" }
+            ],
+            "styles": [
+              "src/assets/css/bootstrap.min.css",
+              "src/assets/css/accordion.css",
+              "node_modules/@swimlane/ngx-datatable/index.css",
+              "node_modules/@swimlane/ngx-datatable/themes/material.scss",
+              "node_modules/@swimlane/ngx-datatable/assets/icons.css",
+              "node_modules/@fortawesome/fontawesome-free/css/all.css",
+              "src/styles.css",
+              "src/assets/css/print.css"
+            ],
+            "scripts": [
+              "src/assets/js/jquery-3.5.1.js",
+              "src/assets/js/menu.js",
+              "src/assets/js/header.js",
+              "src/assets/js/popper.min.js",
+              "src/assets/js/bootstrap.min.js"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "4mb",
+                  "maximumError": "4mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "4mb",
+                  "maximumError": "4mb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": true,
+              "optimization": true,
+              "vendorChunk": false,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          }
+        },
+        "serve": {
+          "builder": "ngx-build-plus:dev-server",
+          "options": { "browserTarget": "TuZonaSegura:build" },
+          "configurations": {
+            "production": { "browserTarget": "TuZonaSegura:build:production" }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": { "browserTarget": "TuZonaSegura:build" }
+        },
+        "test": {
+          "builder": "ngx-build-plus:karma",
+          "options": {
+            "main": "src/test.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "src/tsconfig.spec.json",
+            "karmaConfig": "src/karma.conf.js",
+            "styles": [{ "input": "styles.css" }],
+            "scripts": [],
+            "assets": [
+              { "glob": "favicon.ico", "input": "src/", "output": "/" },
+              { "glob": "**/*", "input": "src/assets", "output": "/assets" }
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["src/tsconfig.app.json", "src/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
+    },
+    "TuZonaSegura-e2e": {
+      "root": "e2e/",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "e2e/protractor.conf.js",
+            "devServerTarget": "TuZonaSegura:serve"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "e2e/tsconfig.e2e.json",
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
+    },
+    "appaportante": {
+      "projectType": "application",
+      "schematics": { "@schematics/angular:application": { "strict": true } },
+      "root": "projects/appaportante",
+      "sourceRoot": "projects/appaportante/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "ngx-build-plus:browser",
+          "options": {
+            "outputPath": "dist/appaportante",
+            "index": "projects/appaportante/src/index.html",
+            "main": "projects/appaportante/src/main.ts",
+            "polyfills": "projects/appaportante/src/polyfills.ts",
+            "tsConfig": "projects/appaportante/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "projects/appaportante/src/favicon.ico",
+              "projects/appaportante/src/assets"
+            ],
+            "styles": [
+              "projects/appaportante/src/assets/css/bootstrap.min.css",
+              "projects/appaportante/src/assets/css/accordion.css",
+              "projects/appaportante/src/styles.css"
+            ],
+            "scripts": [
+              "projects/appaportante/src/assets/js/jquery-3.5.1.js",
+              "node_modules/popper.js/dist/popper.js",
+              "node_modules/bootstrap/dist/js/bootstrap.min.js",
+              "projects/appaportante/src/assets/js/menu.js",
+              "projects/appaportante/src/assets/js/header.js"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "4mb",
+                  "maximumError": "4mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "4mb",
+                  "maximumError": "4mb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "projects/appaportante/src/environments/environment.ts",
+                  "with": "projects/appaportante/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true
+            }
+          }
+        },
+        "serve": {
+          "builder": "ngx-build-plus:dev-server",
+          "options": { "browserTarget": "appaportante:build" },
+          "configurations": {
+            "production": { "browserTarget": "appaportante:build:production" }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": { "browserTarget": "appaportante:build" }
+        },
+        "test": {
+          "builder": "ngx-build-plus:karma",
+          "options": {
+            "main": "projects/appaportante/src/test.ts",
+            "polyfills": "projects/appaportante/src/polyfills.ts",
+            "tsConfig": "projects/appaportante/tsconfig.spec.json",
+            "karmaConfig": "projects/appaportante/karma.conf.js",
+            "assets": [
+              "projects/appaportante/src/favicon.ico",
+              "projects/appaportante/src/assets"
+            ],
+            "styles": ["projects/appaportante/src/styles.css"],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/appaportante/tsconfig.app.json",
+              "projects/appaportante/tsconfig.spec.json",
+              "projects/appaportante/e2e/tsconfig.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/appaportante/e2e/protractor.conf.js",
+            "devServerTarget": "appaportante:serve"
+          },
+          "configurations": {
+            "production": { "devServerTarget": "appaportante:serve:production" }
+          }
+        }
+      }
+    },
+    "apppensionista": {
+      "projectType": "application",
+      "schematics": { "@schematics/angular:application": { "strict": true } },
+      "root": "projects/apppensionista",
+      "sourceRoot": "projects/apppensionista/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "ngx-build-plus:browser",
+          "options": {
+            "outputPath": "dist/apppensionista",
+            "index": "projects/apppensionista/src/index.html",
+            "main": "projects/apppensionista/src/main.ts",
+            "polyfills": "projects/apppensionista/src/polyfills.ts",
+            "tsConfig": "projects/apppensionista/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "projects/apppensionista/src/favicon.ico",
+              "projects/apppensionista/src/assets"
+            ],
+            "styles": [
+              "projects/apppensionista/src/assets/css/bootstrap.min.css",
+              "projects/apppensionista/src/assets/css/accordion.css",
+              "projects/apppensionista/src/styles.css",
+              "node_modules/@swimlane/ngx-datatable/index.css",
+              "node_modules/@swimlane/ngx-datatable/themes/material.scss",
+              "node_modules/@swimlane/ngx-datatable/assets/icons.css",
+              "node_modules/@fortawesome/fontawesome-free/css/all.css"
+            ],
+            "scripts": [
+              "projects/apppensionista/src/assets/js/jquery-3.5.1.js",
+              "projects/apppensionista/src/assets/js/menu.js",
+              "projects/apppensionista/src/assets/js/header.js"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "4mb",
+                  "maximumError": "4mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "4mb",
+                  "maximumError": "4mb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "projects/apppensionista/src/environments/environment.ts",
+                  "with": "projects/apppensionista/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true
+            }
+          }
+        },
+        "serve": {
+          "builder": "ngx-build-plus:dev-server",
+          "options": { "browserTarget": "apppensionista:build" },
+          "configurations": {
+            "production": { "browserTarget": "apppensionista:build:production" }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": { "browserTarget": "apppensionista:build" }
+        },
+        "test": {
+          "builder": "ngx-build-plus:karma",
+          "options": {
+            "main": "projects/apppensionista/src/test.ts",
+            "polyfills": "projects/apppensionista/src/polyfills.ts",
+            "tsConfig": "projects/apppensionista/tsconfig.spec.json",
+            "karmaConfig": "projects/apppensionista/karma.conf.js",
+            "assets": [
+              "projects/apppensionista/src/favicon.ico",
+              "projects/apppensionista/src/assets"
+            ],
+            "styles": ["projects/apppensionista/src/styles.css"],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/apppensionista/tsconfig.app.json",
+              "projects/apppensionista/tsconfig.spec.json",
+              "projects/apppensionista/e2e/tsconfig.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/apppensionista/e2e/protractor.conf.js",
+            "devServerTarget": "apppensionista:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "apppensionista:serve:production"
+            }
+          }
+        }
+      }
+    },
+    "appempleador": {
+      "projectType": "application",
+      "schematics": { "@schematics/angular:application": { "strict": true } },
+      "root": "projects/appempleador",
+      "sourceRoot": "projects/appempleador/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "ngx-build-plus:browser",
+          "options": {
+            "outputPath": "dist/appempleador",
+            "index": "projects/appempleador/src/index.html",
+            "main": "projects/appempleador/src/main.ts",
+            "polyfills": "projects/appempleador/src/polyfills.ts",
+            "tsConfig": "projects/appempleador/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "projects/appempleador/src/favicon.ico",
+              "projects/appempleador/src/assets"
+            ],
+            "styles": [
+              "projects/appempleador/src/assets/css/bootstrap.min.css",
+              "projects/appempleador/src/assets/css/accordion.css",
+              "projects/appempleador/src/styles.css"
+            ],
+            "scripts": [
+              "projects/appempleador/src/assets/js/jquery-3.5.1.js",
+              "projects/appempleador/src/assets/js/menu.js",
+              "projects/appempleador/src/assets/js/header.js"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/appempleador/src/environments/environment.ts",
+                  "with": "projects/appempleador/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true
+            }
+          }
+        },
+        "serve": {
+          "builder": "ngx-build-plus:dev-server",
+          "options": { "browserTarget": "appempleador:build" },
+          "configurations": {
+            "production": { "browserTarget": "appempleador:build:production" }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": { "browserTarget": "appempleador:build" }
+        },
+        "test": {
+          "builder": "ngx-build-plus:karma",
+          "options": {
+            "main": "projects/appempleador/src/test.ts",
+            "polyfills": "projects/appempleador/src/polyfills.ts",
+            "tsConfig": "projects/appempleador/tsconfig.spec.json",
+            "karmaConfig": "projects/appempleador/karma.conf.js",
+            "assets": [
+              "projects/appempleador/src/favicon.ico",
+              "projects/appempleador/src/assets"
+            ],
+            "styles": ["projects/appempleador/src/styles.css"],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/appempleador/tsconfig.app.json",
+              "projects/appempleador/tsconfig.spec.json",
+              "projects/appempleador/e2e/tsconfig.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/appempleador/e2e/protractor.conf.js",
+            "devServerTarget": "appempleador:serve"
+          },
+          "configurations": {
+            "production": { "devServerTarget": "appempleador:serve:production" }
+          }
+        }
+      }
+    },
+    "appsctr": {
+      "projectType": "application",
+      "schematics": { "@schematics/angular:application": { "strict": true } },
+      "root": "projects/appsctr",
+      "sourceRoot": "projects/appsctr/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "ngx-build-plus:browser",
+          "options": {
+            "outputPath": "dist/appsctr",
+            "index": "projects/appsctr/src/index.html",
+            "main": "projects/appsctr/src/main.ts",
+            "polyfills": "projects/appsctr/src/polyfills.ts",
+            "tsConfig": "projects/appsctr/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "projects/appsctr/src/favicon.ico",
+              "projects/appsctr/src/assets"
+            ],
+            "styles": [
+              "projects/appsctr/src/assets/css/bootstrap.min.css",
+              "projects/appsctr/src/assets/css/accordion.css",
+              "projects/appsctr/src/styles.css"
+            ],
+            "scripts": [
+              "projects/appsctr/src/assets/js/jquery-3.5.1.js",
+              "projects/appsctr/src/assets/js/menu.js",
+              "projects/appsctr/src/assets/js/header.js"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/appsctr/src/environments/environment.ts",
+                  "with": "projects/appsctr/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "4mb",
+                  "maximumError": "4mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "4mb",
+                  "maximumError": "4mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "ngx-build-plus:dev-server",
+          "options": { "browserTarget": "appsctr:build" },
+          "configurations": {
+            "production": { "browserTarget": "appsctr:build:production" }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": { "browserTarget": "appsctr:build" }
+        },
+        "test": {
+          "builder": "ngx-build-plus:karma",
+          "options": {
+            "main": "projects/appsctr/src/test.ts",
+            "polyfills": "projects/appsctr/src/polyfills.ts",
+            "tsConfig": "projects/appsctr/tsconfig.spec.json",
+            "karmaConfig": "projects/appsctr/karma.conf.js",
+            "assets": [
+              "projects/appsctr/src/favicon.ico",
+              "projects/appsctr/src/assets"
+            ],
+            "styles": ["projects/appsctr/src/styles.css"],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/appsctr/tsconfig.app.json",
+              "projects/appsctr/tsconfig.spec.json",
+              "projects/appsctr/e2e/tsconfig.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/appsctr/e2e/protractor.conf.js",
+            "devServerTarget": "appsctr:serve"
+          },
+          "configurations": {
+            "production": { "devServerTarget": "appsctr:serve:production" }
+          }
+        }
+      }
+    }
+  },
+  "schematics": { "@schematics/angular:component": { "style": "css" } },
+  "cli": { "analytics": "d3939c76-aefa-4336-afe3-fa275cf0a77a" }
+}
