@@ -57,8 +57,10 @@
             <b>uso personal y exclusivo para titulares afiliados del Sistema Nacional de Pensiones (Régimen 19990)</b>
             para el ingreso de sus solicitudes de pensión de jubilación o por discapacidad para el trabajo.
           </p>
-          <p class="text-center"><b><a href="">Haz clic aquí</a></b> para revisar la lista de pensiones que puedes
-            solicitar.</p>
+          <p class="text-center">
+                <a data-toggle="modal" 
+                    data-target="#modalInfo" class="link-primary link__text" ><b>Haz clic aquí </b>
+                </a>para revisar la lista de pensiones que puedes solicitar.</p>
         </div>
       </div>
       <div class="d-flex justify-content-around">
@@ -127,8 +129,9 @@
         </div>
         <div class="d-flex justify-content-around my_card_movil_instrucciones mt-2">
           <p class="text-center">
-            <button (click)="openModal()" ><b>Haz clic aquí </b>
-            </button>para revisar la lista de pensiones que puedes solicitar.</p>
+            <a data-toggle="modal" 
+                data-target="#modalInfo" class="link-primary link__text" ><b>Haz clic aquí </b>
+            </a>para revisar la lista de pensiones que puedes solicitar.</p>
         </div>
         <div class="d-flex justify-content-around my_card_movil_instrucciones mt-2">
           <p class="text-center"><b>Requisitos:</b></p>
@@ -183,56 +186,7 @@
   </div>
 </div>
 
-<!-- <ng-template #infoModal let-modal>
-    <div class="modal-header border-0">
-        <div style="text-align: center !important;">
-        </div>
-        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
-    </div>
-    <div class="modal-body">
-        <div class="w-100">
-            <div class="w-100 text-center popup-body-titulo">
-                <img loading="lazy"
-                    src="~/../assets/images/centro-atencion-virtual/Icono_Documento_Peru.png">
-                <p class="mt-3">
-                    Si perteneces al <b>Régimen 19990</b>, podrás solicitar, a través de este servicio:
-                </p>
-            </div>
-            <div class="w-100 d-flex justify-content-center card-text">
-                <ul class="popup-body-list">
-                    <li>
-                        Pensión de jubilación régimen general
-                    </li>
-                    <li>
-                        Pensión de jubilación adelantada*
-                    </li>
-                    <li>
-                        Regímenes especiales**
-                    </li>
-                    <li>
-                        Pensión proporcional
-                    </li>
-                    <li>
-                        Pensión conyugal
-                    </li>
-                    <li>
-                        Pensión por discapacidad para el trabajo
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="modal-footer border-0">
-        <div class="w-100 text-start" style="font-size: 0.8rem;">
-            <p>(*) Por cese o discapacidad.
-                <br>
-                (**) Minería, construcción civil, periodistas, industria del cuero, marítimos, pilotos y copilotos.
-            </p>
-        </div>
-    </div>
-</ng-template> -->
-
-<!-- Estructura del modal -->
+<!-- modal -->
 <div class="modal fade"
     id="modalInfo"
     tabindex="-1"
@@ -244,10 +198,10 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header border-0">
-        <button type="button" class="close" (click)="closeModal()"
+        <a class="close link__text" data-dismiss="modal"
                 aria-label="Cerrar">
           <span aria-hidden="true">X</span>
-        </button>
+        </a>
       </div>
       <div class="modal-body">
         <div class="w-100">

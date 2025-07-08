@@ -6,6 +6,7 @@ import { CentroAtencionVirtualComponent } from './centro-atencion-virtual.compon
 import { MainComponent } from './components/main/main.component';
 import { SharedModule } from '../../shared/shared.module';
 
+
 @NgModule({
   declarations: [
     CentroAtencionVirtualComponent,

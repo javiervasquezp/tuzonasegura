@@ -5,19 +5,19 @@ import { MainComponent } from './components/main/main.component';
 
 const routes: Routes = [
   {
-    path: '',
-    component: CentroAtencionVirtualComponent,
-    children: [
-      {
-        path: '',
-        component: MainComponent,
-        data: {
-          path:'centro-atencion-virtual'
-        }
-      },
-      {path: '', redirectTo: 'centro-atencion-virtual', pathMatch: 'full' }
-    ]
-  },
+      path: '',
+      component: CentroAtencionVirtualComponent,
+      children: [
+        {
+          path: '',
+          component: MainComponent,
+          data: {
+            path:'centro-atencion-virtual'
+          }
+        },
+        {path: '', redirectTo: 'centro-atencion-virtual', pathMatch: 'full' }
+      ]
+    },
 ];
 
 @NgModule({
