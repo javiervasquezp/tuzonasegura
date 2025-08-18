@@ -13,6 +13,15 @@
     "build:TuZonaSegura": "ng build --configuration production --project TuZonaSegura",
     "build:apppensionistadist": "ng build --extra-webpack-config webpack.externals.js --configuration production --single-bundle --project apppensionista --output-hashing none --vendor-chunk false --output-path src/assets/micro-frontends/apppensionista && node projects/apppensionista/mergelib.js && node copy-bundles.js",
     "build:appaportantedist": "ng build --extra-webpack-config webpack.externals.js --configuration production --single-bundle --project appaportante --output-hashing none --vendor-chunk false --output-path src/assets/micro-frontends/appaportante && node projects/appaportante/mergelib.js && node copy-bundles.js",
+    
+    "buildqa": "npm run build:appsqa && npm run build:TuZonaSeguraqa",
+    "build:appsqa": "npm run build:appaportanteqa && npm run build:apppensionistaqa && npm run build:appempleadorqa && npm run build:appsctrqa",
+    "build:appaportanteqa": "ng build --extra-webpack-config webpack.externals.js --configuration qa --single-bundle --project appaportante --output-hashing none --vendor-chunk false --output-path src/assets/micro-frontends/appaportante && node projects/appaportante/mergelib.js",
+    "build:apppensionistaqa": "ng build --extra-webpack-config webpack.externals.js --configuration qa --single-bundle --project apppensionista --output-hashing none --vendor-chunk false --output-path src/assets/micro-frontends/apppensionista && node projects/apppensionista/mergelib.js",
+    "build:appempleadorqa": "ng build --extra-webpack-config webpack.externals.js --configuration qa --single-bundle --project appempleador --output-hashing none --vendor-chunk false --output-path src/assets/micro-frontends/appempleador && node projects/appempleador/mergelib.js",
+    "build:appsctrqa": "ng build --extra-webpack-config webpack.externals.js --configuration qa --single-bundle --project appsctr --output-hashing none --vendor-chunk false --output-path src/assets/micro-frontends/appsctr && node projects/appsctr/mergelib.js",
+    "build:TuZonaSeguraqa": "ng build --configuration qa --project TuZonaSegura",
+
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",

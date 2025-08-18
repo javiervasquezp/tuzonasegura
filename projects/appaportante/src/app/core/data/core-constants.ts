@@ -1,4 +1,4 @@
-export module CoreConstants {
+export namespace CoreConstants {
     export const LocalStorage = { 
         Token: 'app_token',
         NavegationId:'navegationId'

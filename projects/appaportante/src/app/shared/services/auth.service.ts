@@ -3,6 +3,7 @@ import { catchError, map } from 'rxjs/operators';
 import { Observable, of, throwError } from 'rxjs';
 import { ApiService } from '../../core/services/api.service';
 import { environment } from 'projects/appaportante/src/environments/environment';
+
 @Injectable({
   providedIn: 'root'
 })

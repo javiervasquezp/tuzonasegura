@@ -50,4 +50,19 @@ import { ApiService } from 'src/app/core/services/api.service';
       }
       return true; 
     }
+
+    estaDentroDeFechas(fechas : string[], hoy: Date) : boolean {
+      var result = false;
+      var vHoy = new Date(hoy.getFullYear(),hoy.getMonth(), hoy.getDate());
+      //console.log(vHoy);
+
+      // fechas.forEach((item) => {
+      //   console.log(new Date(item));
+      // });
+
+      //console.log(fechas.filter((item) => (new Date(item)).toString() == vHoy.toString()).length);
+      result = fechas.filter((item) => (new Date(item)).toString() == vHoy.toString()).length > 0;
+
+      return result;
+    }
   }

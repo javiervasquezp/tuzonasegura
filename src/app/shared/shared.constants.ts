@@ -1,4 +1,4 @@
-export module SharedConstants{
+export namespace SharedConstants{
     export const Perfiles = {
         Aportante: "A",
         Pensionista: "P",
